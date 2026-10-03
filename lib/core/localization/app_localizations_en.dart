@@ -25,6 +25,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signIn => 'Sign in';
 
   @override
+  String get invalidEmailOrPassword => 'Invalid email or password';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get emailHint => 'user@example.com';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
   String get goodMorning => 'Good morning';
 
   @override

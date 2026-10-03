@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/auth/data/auth_repository.dart';
+import '../../features/auth/logic/login_cubit.dart';
 import '../../features/auth/ui/login_screen.dart';
 import '../../features/cart/ui/cart_screen.dart';
 import '../../features/products/ui/home_screen.dart';
@@ -10,7 +12,12 @@ class AppRouter {
     switch (settings.name) {
       case Routes.login:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => BlocProvider(
+            create: (_) => LoginCubit(
+              AuthRepository(),
+            ),
+            child: const LoginScreen(),
+          ),
         );
 
       case Routes.home:

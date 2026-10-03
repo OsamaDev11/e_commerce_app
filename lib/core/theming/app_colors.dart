@@ -27,9 +27,11 @@ abstract final class AppColors {
   static const Color purple = Color(0xFF8B5CF6);
   static const Color orange = Color(0xFFC8873E);
 
-  // Error / delete
-  static const Color errorBackground = Color(0xFFFFF1F2);
-
   // General
   static const Color white = Color(0xFFFFFFFF);
+
+  // States
+  static const Color success = Color(0xFF22C55E);
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color error = Color(0xFFEF4444);
 }

@@ -6,6 +6,12 @@
   "email": "Email",
   "password": "Password",
   "signIn": "Sign in",
+  "invalidEmailOrPassword": "Invalid email or password",
+  "somethingWentWrong": "Something went wrong. Please try again.",
+
+  "emailHint": "user@example.com",
+  "emailRequired": "Email is required",
+  "passwordRequired": "Password is required",
 
   "goodMorning": "Good morning",
   "discoverProducts": "Discover products",
@@ -16,4 +22,5 @@
   "itemsTotal": "Items total",
   "total": "Total",
   "continueShopping": "Continue shopping"
+
 }
