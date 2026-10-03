@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+
+  "welcomeBack": "Welcome back",
+  "signInToContinue": "Sign in to continue shopping.",
+  "email": "Email",
+  "password": "Password",
+  "signIn": "Sign in",
+
+  "goodMorning": "Good morning",
+  "discoverProducts": "Discover products",
+  "featured": "Featured",
+  "addToCart": "Add to cart",
+
+  "myCart": "My Cart",
+  "itemsTotal": "Items total",
+  "total": "Total",
+  "continueShopping": "Continue shopping"
+}
