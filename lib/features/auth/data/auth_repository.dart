@@ -13,7 +13,7 @@ class AuthRepository {
       );
 
       final isValidCredentials =
-          email == 'user@example.com' &&
+          email == 'osama@email.com' &&
               password == '123456';
 
       if (!isValidCredentials) {

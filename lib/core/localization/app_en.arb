@@ -16,11 +16,15 @@
   "goodMorning": "Good morning",
   "discoverProducts": "Discover products",
   "featured": "Featured",
+  "products": "products",
   "addToCart": "Add to cart",
 
   "myCart": "My Cart",
+  "items": "items",
   "itemsTotal": "Items total",
   "total": "Total",
-  "continueShopping": "Continue shopping"
+  "continueShopping": "Continue shopping",
+  "cartIsEmpty": "Your cart is empty",
+  "addProductsToCart": "Add some products to your cart."
 
 }

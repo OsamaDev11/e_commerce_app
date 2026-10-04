@@ -172,6 +172,12 @@ abstract class AppLocalizations {
   /// **'Featured'**
   String get featured;
 
+  /// No description provided for @products.
+  ///
+  /// In en, this message translates to:
+  /// **'products'**
+  String get products;
+
   /// No description provided for @addToCart.
   ///
   /// In en, this message translates to:
@@ -183,6 +189,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My Cart'**
   String get myCart;
+
+  /// No description provided for @items.
+  ///
+  /// In en, this message translates to:
+  /// **'items'**
+  String get items;
 
   /// No description provided for @itemsTotal.
   ///
@@ -201,6 +213,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue shopping'**
   String get continueShopping;
+
+  /// No description provided for @cartIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get cartIsEmpty;
+
+  /// No description provided for @addProductsToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add some products to your cart.'**
+  String get addProductsToCart;
 }
 
 class _AppLocalizationsDelegate
