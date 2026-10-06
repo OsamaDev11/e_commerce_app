@@ -25,6 +25,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signIn => 'Sign in';
 
   @override
+  String get invalidEmailOrPassword => 'Invalid email or password';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get emailHint => 'user@example.com';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
   String get goodMorning => 'Good morning';
 
   @override
@@ -34,10 +49,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featured => 'Featured';
 
   @override
+  String get products => 'products';
+
+  @override
   String get addToCart => 'Add to cart';
 
   @override
   String get myCart => 'My Cart';
+
+  @override
+  String get items => 'items';
 
   @override
   String get itemsTotal => 'Items total';
@@ -47,4 +68,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continueShopping => 'Continue shopping';
+
+  @override
+  String get cartIsEmpty => 'Your cart is empty';
+
+  @override
+  String get addProductsToCart => 'Add some products to your cart.';
 }

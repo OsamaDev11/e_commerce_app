@@ -90,16 +90,25 @@ final class AppScale {
     _ensureInitialized();
 
     final base = value.toDouble();
-    final scaled = base * _widthScale;
 
-    return scaled
+    if (base == 0) {
+      return 0;
+    }
+
+    final sign = base.sign;
+    final absoluteBase = base.abs();
+
+    final scaled = absoluteBase * _widthScale;
+
+    final clamped = scaled
         .clamp(
-      base * 0.85,
-      base * 1.20,
+      absoluteBase * 0.85,
+      absoluteBase * 1.20,
     )
         .toDouble();
-  }
 
+    return clamped * sign;
+  }
   /// Font-size scaling with controlled limits.
   static double sp(num value) {
     _ensureInitialized();

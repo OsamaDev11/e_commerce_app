@@ -1,17 +1,28 @@
-# e_commerce_app
+#e_commerce_app
 
-A new Flutter project.
+المشروع عبارة عن متجر بسيط فيه شاشة Login، وشاشة Home لعرض المنتجات، وشاشة Cart للسلة. كل البيانات المستخدمة حاليًا محلية ومش حقيقية، سواء بيانات تسجيل الدخول أو المنتجات، والهدف من المشروع هو التدريب وتوضيح طريقة الشغل والتنظيم اللي باتبعها في بناء ايا تطبيق .
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+رتبت المشروع بنظام features، بحيث كل feature تكون منفصلة بملفاتها، وقسمتها إلى ui وlogic وdata، وكل مجلد فيهم فيه الملفات الخاصة بالوظيفة تبعته. وعملت كمان مجلد core للأشياء المشتركة على مستوى التطبيق كله.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+اخترت هذا التنظيم لأنه من وجهة نظري بيساعد كثير في فصل المسؤوليات، وبيخلي فهم المشروع والتعديل عليه أسهل فيما بعد، وبنفس الوقت ما حبيت أكبر الـ Architecture أكثر من حاجة المشروع وأدخل في Overengineering.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+بالنسبة للـ State Management استخدمت Cubit، لأنه واضح وبسيط في فصل الـ UI عن منطق التعامل مع البيانات، وكمان هو الأسلوب اللي تعلمته لحد الآن واشتغلت فيه قبل، ولقيته مناسب جدًا للمشروع.
+
+
+في شاشة Login كان عندي أكثر من State مثل Initial وLoading وSuccess وFailure، أما في السلة استخدمت CartState واحدة فيها بيانات المنتجات والكميات الموجودة حاليًا، ومنها بنحسب عدد العناصر والسعر الإجمالي.
+
+
+في شوية ملفات إضافية اتعملت لتنظيم المشروع وتجهيزه بشكل أفضل، مثل Localization وTheming وResponsive UI وRouting وError Handling. ممكن بعضهم يكون زيادة على حجم المشروع الحالي، بس عملتهم بشكل بسيط عشان لو المشروع توسع بعدين ما أضطر أرجع أرتب كل شيء من الصفر.
+
+
+أهم تحدي واجهته كان موضوع مشاركة بيانات السلة بين HomeScreen وCartScreen، لأنه الشاشتين لازم يتعاملوا مع نفس البيانات. الحل كان إني أنشئ CartCubit واحدة عند الدخول على HomeScreen، ولما أروح على CartScreen أبعت نفس الـ Cubit بدل ما أنشئ واحدة جديدة. هيك الشاشتين بيضلوا شايفين نفس مصدر البيانات، وأي تعديل من شاشة بيظهر مباشرة في الثانية.
+بيانات السلة حاليًا موجودة في الذاكرة فقط، يعني بتضل محفوظة وأنا بتنقل بين Home وCart، لكن لو سكرت التطبيق وفتحته من جديد بتبدأ السلة من الصفر، وهذا مناسب للمطلوب الحالي.
+
+
+لو المشروع تحول فيما بعد لتطبيق حقيقي، ممكن نضيف Backend وAPI حقيقية، Authentication حقيقية، تخزين دائم للسلة، Local Database أو Cache، تعامل أقوى مع أخطاء الشبكة، Tests، وميزات مثل Checkout والدفع.
+
+
+ملاحظة: الـ AI كان إله دور مساعد معي في أغلب مراحل المشروع، لكن كنت أراجع الكود اللي ينكتب وأحاول أفهم كل جزء فيه وأتأكد منه قبل ما أعتمده.
