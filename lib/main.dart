@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'core/routing/app_router.dart';
-import 'my_app.dart';
+import 'package:e_commerce_app/core/routing/app_router.dart';
+import 'package:e_commerce_app/my_app.dart';
 
-void main() {
-  runApp(
-    MyApp(
-      appRouter: AppRouter(),
-    ),
-  );
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  runApp(MyApp(appRouter: AppRouter()));
 }

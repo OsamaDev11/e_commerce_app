@@ -1,4 +1,4 @@
-import '../../../core/networking/app_failure.dart';
+import 'package:e_commerce_app/core/networking/app_failure.dart';
 
 sealed class LoginState {
   const LoginState();

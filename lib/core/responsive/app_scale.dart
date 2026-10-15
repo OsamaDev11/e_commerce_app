@@ -1,197 +1,72 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-final class AppScale {
-  AppScale._();
-
-  // Figma design size
+abstract final class AppScale {
   static const double _designWidth = 390;
   static const double _designHeight = 844;
 
-  static double _screenWidth = _designWidth;
-  static double _screenHeight = _designHeight;
+  static const double maxTextScaleFactor = 1.3;
 
-  static bool _isInitialized = false;
+  static Size? _size;
+  static double _widthScale = 1;
+  static double _fontScale = 1;
 
-  /// Initialize from MaterialApp builder.
-  ///
-  /// This will be called again automatically when the screen size,
-  /// orientation, or window size changes.
   static void init(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    if (size == _size) return;
 
-    _screenWidth = size.width;
-    _screenHeight = size.height;
+    final isFirstInit = _size == null;
+    _size = size;
 
-    _isInitialized = true;
+    final widthRatio = size.width / _designWidth;
+    final heightRatio = size.height / _designHeight;
+
+    _widthScale = widthRatio.clamp(0.85, 1.20).toDouble();
+    _fontScale = ((widthRatio + heightRatio) / 2).clamp(0.90, 1.15).toDouble();
+
+    if (!isFirstInit) _rebuildDescendants(context);
   }
 
-  /// Provides safe design-size values if AppScale is used
-  /// before initialization.
-  static void _ensureInitialized() {
-    if (_isInitialized) return;
-
-    _screenWidth = _designWidth;
-    _screenHeight = _designHeight;
-  }
-
-  // ---------------------------------------------------------------------------
-  // Screen
-  // ---------------------------------------------------------------------------
-
-  static double get screenWidth {
-    _ensureInitialized();
-    return _screenWidth;
-  }
-
-  static double get screenHeight {
-    _ensureInitialized();
-    return _screenHeight;
-  }
-
-  static double get shortestSide {
-    _ensureInitialized();
-
-    return _screenWidth < _screenHeight
-        ? _screenWidth
-        : _screenHeight;
-  }
-
-  static bool get isTablet => shortestSide >= 600;
-
-  // ---------------------------------------------------------------------------
-  // Scale factors
-  // ---------------------------------------------------------------------------
-
-  static double get _widthScale {
-    _ensureInitialized();
-    return _screenWidth / _designWidth;
-  }
-
-  static double get _heightScale {
-    _ensureInitialized();
-    return _screenHeight / _designHeight;
-  }
-
-  // ---------------------------------------------------------------------------
-  // General scaling
-  // ---------------------------------------------------------------------------
-
-  /// General-purpose scaling.
-  ///
-  /// Recommended for:
-  /// - spacing
-  /// - padding
-  /// - icon sizes
-  /// - component sizes
-  ///
-  /// Scaling is limited to prevent elements from becoming
-  /// excessively small or large.
-  static double s(num value) {
-    _ensureInitialized();
-
-    final base = value.toDouble();
-
-    if (base == 0) {
-      return 0;
+  static void _rebuildDescendants(BuildContext context) {
+    void rebuild(Element element) {
+      element.markNeedsBuild();
+      element.visitChildren(rebuild);
     }
 
-    final sign = base.sign;
-    final absoluteBase = base.abs();
-
-    final scaled = absoluteBase * _widthScale;
-
-    final clamped = scaled
-        .clamp(
-      absoluteBase * 0.85,
-      absoluteBase * 1.20,
-    )
-        .toDouble();
-
-    return clamped * sign;
-  }
-  /// Font-size scaling with controlled limits.
-  static double sp(num value) {
-    _ensureInitialized();
-
-    final base = value.toDouble();
-
-    final scale = (_widthScale + _heightScale) / 2;
-    final scaled = base * scale;
-
-    return scaled
-        .clamp(
-      base * 0.90,
-      base * 1.15,
-    )
-        .toDouble();
+    (context as Element).visitChildren(rebuild);
   }
 
-  /// Pure width-based scaling.
-  ///
-  /// Use only when the size really needs to depend on screen width.
-  static double w(num value) {
-    _ensureInitialized();
+  static double s(num value) => _widthScale * value;
 
-    return value.toDouble() * _widthScale;
-  }
+  static double sp(num value) => _fontScale * value;
 
-  /// Pure height-based scaling.
-  ///
-  /// Use only when the size really needs to depend on screen height.
-  static double h(num value) {
-    _ensureInitialized();
-
-    return value.toDouble() * _heightScale;
-  }
-
-  /// Border radius.
   static double r(num value) => s(value);
 
-  // ---------------------------------------------------------------------------
-  // Gaps
-  // ---------------------------------------------------------------------------
+  static SizedBox gh(num value) => SizedBox(height: s(value));
 
-  static SizedBox gh(num value) {
-    return SizedBox(
-      height: s(value),
-    );
-  }
+  static SizedBox gw(num value) => SizedBox(width: s(value));
 
-  static SizedBox gw(num value) {
-    return SizedBox(
-      width: s(value),
-    );
-  }
+  static EdgeInsets all(num value) => EdgeInsets.all(s(value));
 
-  // ---------------------------------------------------------------------------
-  // Insets
-  // ---------------------------------------------------------------------------
-
-  static EdgeInsets all(num value) {
-    return EdgeInsets.all(
-      s(value),
-    );
-  }
-
-  static EdgeInsets hOnly(num value) {
-    return EdgeInsets.symmetric(
-      horizontal: s(value),
-    );
-  }
-
-  static EdgeInsets vOnly(num value) {
-    return EdgeInsets.symmetric(
-      vertical: s(value),
-    );
-  }
-
-  static EdgeInsets symmetric({
-    num horizontal = 0,
-    num vertical = 0,
-  }) {
+  static EdgeInsets symmetric({num horizontal = 0, num vertical = 0}) {
     return EdgeInsets.symmetric(
       horizontal: s(horizontal),
       vertical: s(vertical),
     );
   }
+
+  static EdgeInsetsDirectional only({
+    num start = 0,
+    num top = 0,
+    num end = 0,
+    num bottom = 0,
+  }) {
+    return EdgeInsetsDirectional.only(
+      start: s(start),
+      top: s(top),
+      end: s(end),
+      bottom: s(bottom),
+    );
+  }
+
+  static BorderRadius radius(num value) => BorderRadius.circular(r(value));
 }

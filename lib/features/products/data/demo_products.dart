@@ -1,5 +1,5 @@
-import '../../../core/constants/app_assets.dart';
-import 'product_model.dart';
+import 'package:e_commerce_app/core/constants/app_assets.dart';
+import 'package:e_commerce_app/features/products/data/product_model.dart';
 
 abstract final class DemoProducts {
   static final List<ProductModel> products = [
@@ -26,7 +26,6 @@ abstract final class DemoProducts {
       name: 'Sneakers',
       price: 95.50,
       imageAsset: AppAssets.images.img4,
-
     ),
   ];
 }

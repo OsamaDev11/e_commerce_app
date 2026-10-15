@@ -118,6 +118,12 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get password;
 
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'••••••••'**
+  String get passwordHint;
+
   /// No description provided for @signIn.
   ///
   /// In en, this message translates to:
@@ -172,11 +178,11 @@ abstract class AppLocalizations {
   /// **'Featured'**
   String get featured;
 
-  /// No description provided for @products.
+  /// No description provided for @productsCount.
   ///
   /// In en, this message translates to:
-  /// **'products'**
-  String get products;
+  /// **'{count, plural, =0{No products} =1{1 product} other{{count} products}}'**
+  String productsCount(int count);
 
   /// No description provided for @addToCart.
   ///
@@ -190,11 +196,11 @@ abstract class AppLocalizations {
   /// **'My Cart'**
   String get myCart;
 
-  /// No description provided for @items.
+  /// No description provided for @itemsCount.
   ///
   /// In en, this message translates to:
-  /// **'items'**
-  String get items;
+  /// **'{count, plural, =0{No items} =1{1 item} other{{count} items}}'**
+  String itemsCount(int count);
 
   /// No description provided for @itemsTotal.
   ///
@@ -225,6 +231,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add some products to your cart.'**
   String get addProductsToCart;
+
+  /// No description provided for @pageNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Page not found'**
+  String get pageNotFound;
 }
 
 class _AppLocalizationsDelegate
