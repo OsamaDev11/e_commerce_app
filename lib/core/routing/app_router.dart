@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/auth/data/auth_repository.dart';
-import '../../features/auth/logic/login_cubit.dart';
-import '../../features/auth/ui/login_screen.dart';
-import '../../features/cart/logic/cart_cubit.dart';
-import '../../features/cart/ui/cart_screen.dart';
-import '../../features/products/ui/home_screen.dart';
-import 'routes.dart';
+
+import 'package:e_commerce_app/core/localization/localization_extension.dart';
+import 'package:e_commerce_app/core/routing/routes.dart';
+import 'package:e_commerce_app/features/auth/data/auth_repository.dart';
+import 'package:e_commerce_app/features/auth/logic/login_cubit.dart';
+import 'package:e_commerce_app/features/auth/ui/screens/login_screen.dart';
+import 'package:e_commerce_app/features/cart/logic/cart_cubit.dart';
+import 'package:e_commerce_app/features/cart/ui/screens/cart_screen.dart';
+import 'package:e_commerce_app/features/products/ui/screens/home_screen.dart';
 
 class AppRouter {
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -14,9 +16,7 @@ class AppRouter {
       case Routes.login:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => LoginCubit(
-              AuthRepository(),
-            ),
+            create: (_) => LoginCubit(AuthRepository()),
             child: const LoginScreen(),
           ),
         );
@@ -38,12 +38,11 @@ class AppRouter {
             child: const CartScreen(),
           ),
         );
+
       default:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Route not found'),
-            ),
+          builder: (context) => Scaffold(
+            body: Center(child: Text(context.l10n.pageNotFound)),
           ),
         );
     }

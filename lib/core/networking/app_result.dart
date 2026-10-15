@@ -1,4 +1,4 @@
-import 'app_failure.dart';
+import 'package:e_commerce_app/core/networking/app_failure.dart';
 
 sealed class AppResult<T> {
   const AppResult();

@@ -1,4 +1,4 @@
-import '../../products/data/product_model.dart';
+import 'package:e_commerce_app/features/products/data/product_model.dart';
 
 class CartItemModel {
   const CartItemModel({

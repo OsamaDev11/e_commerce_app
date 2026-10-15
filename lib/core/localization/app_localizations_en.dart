@@ -22,6 +22,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
+  String get passwordHint => '••••••••';
+
+  @override
   String get signIn => 'Sign in';
 
   @override
@@ -49,7 +52,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featured => 'Featured';
 
   @override
-  String get products => 'products';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '1 product',
+      zero: 'No products',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get addToCart => 'Add to cart';
@@ -58,7 +70,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myCart => 'My Cart';
 
   @override
-  String get items => 'items';
+  String itemsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+      zero: 'No items',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get itemsTotal => 'Items total';
@@ -74,4 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addProductsToCart => 'Add some products to your cart.';
+
+  @override
+  String get pageNotFound => 'Page not found';
 }

@@ -1,10 +1,10 @@
-import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'core/localization/app_localizations.dart';
-import 'core/responsive/app_scale.dart';
-import 'core/routing/app_router.dart';
+import 'package:e_commerce_app/core/localization/app_localizations.dart';
+import 'package:e_commerce_app/core/responsive/app_scale.dart';
+import 'package:e_commerce_app/core/routing/app_router.dart';
+import 'package:e_commerce_app/core/routing/routes.dart';
+import 'package:e_commerce_app/core/theming/app_theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -17,17 +17,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        ...GlobalMaterialLocalizations.delegates,
-      ],
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) {
         AppScale.init(context);
 
-        return child!;
+        return MediaQuery.withClampedTextScaling(
+          maxScaleFactor: AppScale.maxTextScaleFactor,
+          child: Theme(
+            data: AppTheme.light,
+            child: child ?? const SizedBox.shrink(),
+          ),
+        );
       },
-      supportedLocales: AppLocalizations.supportedLocales,
-      debugShowCheckedModeBanner: false,
       initialRoute: Routes.login,
       onGenerateRoute: appRouter.generateRoute,
     );

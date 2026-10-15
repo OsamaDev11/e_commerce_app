@@ -1,96 +1,68 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../products/data/product_model.dart';
-import '../data/cart_item_model.dart';
-import 'cart_state.dart';
+import 'package:e_commerce_app/features/cart/data/cart_item_model.dart';
+import 'package:e_commerce_app/features/cart/logic/cart_state.dart';
+import 'package:e_commerce_app/features/products/data/product_model.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(const CartState());
 
   void addProduct(ProductModel product) {
-    final existingIndex = state.items.indexWhere(
-          (item) => item.product.id == product.id,
-    );
+    final exists = state.items.any((item) => item.product.id == product.id);
 
-    if (existingIndex == -1) {
-      emit(
-        state.copyWith(
-          items: [
-            ...state.items,
-            CartItemModel(
-              product: product,
-              quantity: 1,
-            ),
-          ],
-        ),
-      );
-
+    if (exists) {
+      increaseQuantity(product.id);
       return;
     }
 
-    increaseQuantity(product.id);
-  }
-
-  void increaseQuantity(int productId) {
-    final updatedItems = state.items.map((item) {
-      if (item.product.id == productId) {
-        return item.copyWith(
-          quantity: item.quantity + 1,
-        );
-      }
-
-      return item;
-    }).toList();
-
     emit(
       state.copyWith(
-        items: updatedItems,
+        items: [
+          ...state.items,
+          CartItemModel(product: product, quantity: 1),
+        ],
       ),
     );
   }
 
-  void decreaseQuantity(int productId) {
-    final item = state.items.firstWhere(
-          (item) => item.product.id == productId,
-    );
+  void increaseQuantity(int productId) {
+    _updateQuantity(productId, (quantity) => quantity + 1);
+  }
 
-    if (item.quantity == 1) {
+  void decreaseQuantity(int productId) {
+    final matches = state.items.where((item) => item.product.id == productId);
+    if (matches.isEmpty) return;
+
+    if (matches.first.quantity == 1) {
       removeProduct(productId);
       return;
     }
 
-    final updatedItems = state.items.map((item) {
-      if (item.product.id == productId) {
-        return item.copyWith(
-          quantity: item.quantity - 1,
-        );
-      }
-
-      return item;
-    }).toList();
-
-    emit(
-      state.copyWith(
-        items: updatedItems,
-      ),
-    );
+    _updateQuantity(productId, (quantity) => quantity - 1);
   }
 
   void removeProduct(int productId) {
-    final updatedItems = state.items
-        .where(
-          (item) => item.product.id != productId,
-    )
-        .toList();
-
     emit(
       state.copyWith(
-        items: updatedItems,
+        items: state.items
+            .where((item) => item.product.id != productId)
+            .toList(),
       ),
     );
   }
 
   void clearCart() {
     emit(const CartState());
+  }
+
+  void _updateQuantity(int productId, int Function(int quantity) update) {
+    emit(
+      state.copyWith(
+        items: state.items.map((item) {
+          if (item.product.id != productId) return item;
+          return item.copyWith(quantity: update(item.quantity));
+        }).toList(),
+      ),
+    );
   }
 }
