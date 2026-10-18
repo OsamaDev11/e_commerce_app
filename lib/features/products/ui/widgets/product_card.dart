@@ -7,7 +7,8 @@ import 'package:e_commerce_app/core/theming/app_dimens.dart';
 import 'package:e_commerce_app/core/theming/app_text_styles.dart';
 import 'package:e_commerce_app/core/utils/price_formatter.dart';
 import 'package:e_commerce_app/core/widgets/app_buttons.dart';
-import 'package:e_commerce_app/features/products/data/product_model.dart';
+import 'package:e_commerce_app/core/widgets/app_network_image.dart';
+import 'package:e_commerce_app/features/products/data/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -34,18 +35,14 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: Center(
-              child: Image.asset(
-                product.imageAsset,
-                width: AppScale.s(AppSizes.productImage),
-                height: AppScale.s(AppSizes.productImage),
-                fit: BoxFit.contain,
-              ),
+            child: AppNetworkImage(
+              url: product.thumbnail,
+              width: double.infinity,
             ),
           ),
           AppScale.gh(AppSpacing.sm),
           Text(
-            product.name,
+            product.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppTextStyles.body.semiBold,

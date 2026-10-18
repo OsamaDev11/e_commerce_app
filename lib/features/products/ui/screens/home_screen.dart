@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:e_commerce_app/core/constants/app_assets.dart';
 import 'package:e_commerce_app/core/localization/localization_extension.dart';
+import 'package:e_commerce_app/core/networking/app_failure_message.dart';
 import 'package:e_commerce_app/core/responsive/app_scale.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/core/theming/app_colors.dart';
@@ -10,9 +11,12 @@ import 'package:e_commerce_app/core/theming/app_dimens.dart';
 import 'package:e_commerce_app/core/theming/app_text_styles.dart';
 import 'package:e_commerce_app/core/widgets/app_buttons.dart';
 import 'package:e_commerce_app/core/widgets/app_page_frame.dart';
+import 'package:e_commerce_app/core/widgets/app_status_views.dart';
 import 'package:e_commerce_app/features/cart/logic/cart_cubit.dart';
 import 'package:e_commerce_app/features/cart/logic/cart_state.dart';
-import 'package:e_commerce_app/features/products/data/demo_products.dart';
+import 'package:e_commerce_app/features/products/data/models/product_model.dart';
+import 'package:e_commerce_app/features/products/logic/products_cubit.dart';
+import 'package:e_commerce_app/features/products/logic/products_state.dart';
 import 'package:e_commerce_app/features/products/ui/widgets/product_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,49 +24,109 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final products = DemoProducts.products;
-
     return AppPageFrame(
       header: const _HomeHeader(),
-      body: SingleChildScrollView(
-        padding: AppScale.symmetric(
-          horizontal: AppSpacing.pagePadding,
-          vertical: AppSpacing.lg,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(l10n.featured, style: AppTextStyles.h2),
-            AppScale.gh(AppSpacing.xxs),
-            Text(
-              l10n.productsCount(products.length),
-              style: AppTextStyles.bodySm.secondary,
-            ),
-            AppScale.gh(AppSpacing.lg),
-            GridView.builder(
-              itemCount: products.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: AppScale.s(ProductCard.maxWidth),
-                crossAxisSpacing: AppScale.s(AppSpacing.sm),
-                mainAxisSpacing: AppScale.s(AppSpacing.md),
-                childAspectRatio: ProductCard.aspectRatio,
-              ),
-              itemBuilder: (context, index) {
-                final product = products[index];
+      body: BlocBuilder<ProductsCubit, ProductsState>(
+        builder: (context, state) {
+          final l10n = context.l10n;
+          final cubit = context.read<ProductsCubit>();
 
-                return ProductCard(
-                  product: product,
-                  onAddToCart: () =>
-                      context.read<CartCubit>().addProduct(product),
-                );
-              },
+          final Widget content = switch (state) {
+            ProductsLoading() => const _FillRemaining(
+                child: AppLoadingView(),
+              ),
+            ProductsFailure(:final failure) => _FillRemaining(
+                child: AppStatusView(
+                  icon: Icons.cloud_off_rounded,
+                  title: failure.userMessage(l10n),
+                  actionLabel: l10n.retry,
+                  onAction: cubit.loadProducts,
+                ),
+              ),
+            ProductsSuccess(:final products) when products.isEmpty =>
+              _FillRemaining(
+                child: AppStatusView(
+                  icon: Icons.inventory_2_outlined,
+                  title: l10n.noProductsFound,
+                ),
+              ),
+            ProductsSuccess(:final products) =>
+              _ProductsGrid(products: products),
+          };
+
+          return RefreshIndicator(
+            onRefresh: cubit.loadProducts,
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [content],
             ),
-          ],
-        ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _FillRemaining extends StatelessWidget {
+  const _FillRemaining({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverFillRemaining(hasScrollBody: false, child: child);
+  }
+}
+
+class _ProductsGrid extends StatelessWidget {
+  const _ProductsGrid({required this.products});
+
+  final List<ProductModel> products;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    return SliverPadding(
+      padding: AppScale.symmetric(
+        horizontal: AppSpacing.pagePadding,
+        vertical: AppSpacing.lg,
+      ),
+      sliver: SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(l10n.featured, style: AppTextStyles.h2),
+                AppScale.gh(AppSpacing.xxs),
+                Text(
+                  l10n.productsCount(products.length),
+                  style: AppTextStyles.bodySm.secondary,
+                ),
+                AppScale.gh(AppSpacing.lg),
+              ],
+            ),
+          ),
+          SliverGrid.builder(
+            itemCount: products.length,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: AppScale.s(ProductCard.maxWidth),
+              crossAxisSpacing: AppScale.s(AppSpacing.sm),
+              mainAxisSpacing: AppScale.s(AppSpacing.md),
+              childAspectRatio: ProductCard.aspectRatio,
+            ),
+            itemBuilder: (context, index) {
+              final product = products[index];
+
+              return ProductCard(
+                product: product,
+                onAddToCart: () =>
+                    context.read<CartCubit>().addProduct(product),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

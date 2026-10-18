@@ -7,7 +7,8 @@ import 'package:e_commerce_app/core/theming/app_dimens.dart';
 import 'package:e_commerce_app/core/theming/app_text_styles.dart';
 import 'package:e_commerce_app/core/utils/price_formatter.dart';
 import 'package:e_commerce_app/core/widgets/app_buttons.dart';
-import 'package:e_commerce_app/features/cart/data/cart_item_model.dart';
+import 'package:e_commerce_app/core/widgets/app_network_image.dart';
+import 'package:e_commerce_app/features/cart/data/models/cart_item_model.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
@@ -35,11 +36,10 @@ class CartItemCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            product.imageAsset,
+          AppNetworkImage(
+            url: product.thumbnail,
             width: AppScale.s(AppSizes.thumbnail),
             height: AppScale.s(AppSizes.thumbnail),
-            fit: BoxFit.contain,
           ),
           AppScale.gw(AppSpacing.sm),
           Expanded(
@@ -51,7 +51,7 @@ class CartItemCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        product.name,
+                        product.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTextStyles.body.semiBold,

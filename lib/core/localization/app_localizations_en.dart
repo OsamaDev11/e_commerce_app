@@ -16,7 +16,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signInToContinue => 'Sign in to continue shopping.';
 
   @override
-  String get email => 'Email';
+  String get username => 'Username';
+
+  @override
+  String get usernameHint => 'Enter your username';
+
+  @override
+  String get usernameRequired => 'Username is required';
 
   @override
   String get password => 'Password';
@@ -25,22 +31,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordHint => '••••••••';
 
   @override
-  String get signIn => 'Sign in';
-
-  @override
-  String get invalidEmailOrPassword => 'Invalid email or password';
-
-  @override
-  String get somethingWentWrong => 'Something went wrong. Please try again.';
-
-  @override
-  String get emailHint => 'user@example.com';
-
-  @override
-  String get emailRequired => 'Email is required';
-
-  @override
   String get passwordRequired => 'Password is required';
+
+  @override
+  String get signIn => 'Sign in';
 
   @override
   String get goodMorning => 'Good morning';
@@ -62,6 +56,9 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get noProductsFound => 'No products found';
 
   @override
   String get addToCart => 'Add to cart';
@@ -95,6 +92,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addProductsToCart => 'Add some products to your cart.';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get errorNoInternet =>
+      'No internet connection. Check your network and try again.';
+
+  @override
+  String get errorTimeout => 'The connection timed out. Please try again.';
+
+  @override
+  String get errorBadRequest =>
+      'The request could not be completed. Please check your input.';
+
+  @override
+  String get errorUnauthorized => 'Please sign in to continue.';
+
+  @override
+  String get errorForbidden => 'You don\'t have permission to do this.';
+
+  @override
+  String get errorNotFound => 'We couldn\'t find what you\'re looking for.';
+
+  @override
+  String get errorServer =>
+      'The server is having trouble. Please try again later.';
 
   @override
   String get pageNotFound => 'Page not found';

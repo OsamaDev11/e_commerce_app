@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:e_commerce_app/core/constants/app_assets.dart';
 import 'package:e_commerce_app/core/localization/localization_extension.dart';
-import 'package:e_commerce_app/core/networking/app_failure.dart';
+import 'package:e_commerce_app/core/networking/app_failure_message.dart';
 import 'package:e_commerce_app/core/responsive/app_scale.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
 import 'package:e_commerce_app/core/theming/app_colors.dart';
@@ -24,12 +24,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     context.read<LoginCubit>().login(
-          email: _emailController.text.trim(),
+          username: _usernameController.text.trim(),
           password: _passwordController.text,
         );
   }
@@ -52,13 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     if (state is LoginFailure) {
-      final message = switch (state.failure.type) {
-        AppFailureType.invalidCredentials => context.l10n.invalidEmailOrPassword,
-        AppFailureType.unknown => context.l10n.somethingWentWrong,
-      };
-
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
+        SnackBar(content: Text(state.failure.userMessage(context.l10n))),
       );
     }
   }
@@ -104,15 +99,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     AppScale.gh(AppSpacing.xxl),
                     AppTextField(
-                      label: l10n.email,
-                      controller: _emailController,
-                      hintText: l10n.emailHint,
-                      prefixIconPath: AppAssets.icons.email,
-                      keyboardType: TextInputType.emailAddress,
+                      label: l10n.username,
+                      controller: _usernameController,
+                      hintText: l10n.usernameHint,
+                      prefixIcon: Icons.person_outline_rounded,
+                      keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
-                      validator: (value) => value == null || value.trim().isEmpty
-                          ? l10n.emailRequired
-                          : null,
+                      validator: (value) =>
+                          value == null || value.trim().isEmpty
+                              ? l10n.usernameRequired
+                              : null,
                     ),
                     AppScale.gh(AppSpacing.xl),
                     AppTextField(

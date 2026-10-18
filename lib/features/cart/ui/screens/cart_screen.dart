@@ -10,6 +10,7 @@ import 'package:e_commerce_app/core/theming/app_text_styles.dart';
 import 'package:e_commerce_app/core/utils/price_formatter.dart';
 import 'package:e_commerce_app/core/widgets/app_buttons.dart';
 import 'package:e_commerce_app/core/widgets/app_page_frame.dart';
+import 'package:e_commerce_app/core/widgets/app_status_views.dart';
 import 'package:e_commerce_app/features/cart/logic/cart_cubit.dart';
 import 'package:e_commerce_app/features/cart/logic/cart_state.dart';
 import 'package:e_commerce_app/features/cart/ui/widgets/cart_item_card.dart';
@@ -33,7 +34,8 @@ class CartScreen extends StatelessWidget {
                 child: ListView.separated(
                   padding: AppScale.all(AppSpacing.pagePadding),
                   itemCount: state.items.length,
-                  separatorBuilder: (_, __) => AppScale.gh(AppSpacing.sm),
+                  separatorBuilder: (context, index) =>
+                      AppScale.gh(AppSpacing.sm),
                   itemBuilder: (context, index) {
                     final item = state.items[index];
                     final productId = item.product.id;
@@ -139,38 +141,12 @@ class _EmptyCart extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return Center(
-      child: SingleChildScrollView(
-        padding: AppScale.all(AppSpacing.xxl),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.shopping_cart_outlined,
-              size: AppScale.s(AppSizes.iconXl),
-              color: AppColors.textSecondary,
-            ),
-            AppScale.gh(AppSpacing.md),
-            Text(
-              l10n.cartIsEmpty,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.h2,
-            ),
-            AppScale.gh(AppSpacing.xs),
-            Text(
-              l10n.addProductsToCart,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.body.secondary,
-            ),
-            AppScale.gh(AppSpacing.xl),
-            AppPrimaryButton(
-              label: l10n.continueShopping,
-              expanded: false,
-              onPressed: () => Navigator.pop(context),
-            ),
-          ],
-        ),
-      ),
+    return AppStatusView(
+      icon: Icons.shopping_cart_outlined,
+      title: l10n.cartIsEmpty,
+      message: l10n.addProductsToCart,
+      actionLabel: l10n.continueShopping,
+      onAction: () => Navigator.pop(context),
     );
   }
 }

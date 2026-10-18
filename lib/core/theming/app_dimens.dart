@@ -33,7 +33,6 @@ abstract final class AppSizes {
   static const double iconXl = 56;
 
   static const double badge = 18;
-  static const double productImage = 72;
   static const double thumbnail = 60;
   static const double quantityLabel = 36;
   static const double decorCircle = 150;

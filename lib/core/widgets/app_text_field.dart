@@ -13,17 +13,22 @@ class AppTextField extends StatefulWidget {
     required this.controller,
     this.hintText,
     this.prefixIconPath,
+    this.prefixIcon,
     this.isPassword = false,
     this.keyboardType,
     this.textInputAction,
     this.validator,
     this.onSubmitted,
-  });
+  }) : assert(
+          prefixIconPath == null || prefixIcon == null,
+          'Provide either prefixIconPath or prefixIcon.',
+        );
 
   final String label;
   final TextEditingController controller;
   final String? hintText;
   final String? prefixIconPath;
+  final IconData? prefixIcon;
   final bool isPassword;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
@@ -39,10 +44,27 @@ class _AppTextFieldState extends State<AppTextField> {
 
   void _toggleObscured() => setState(() => _obscured = !_obscured);
 
+  Widget? _buildPrefixIcon() {
+    final iconPath = widget.prefixIconPath;
+    final icon = widget.prefixIcon;
+    final size = AppScale.s(AppSizes.iconMd);
+
+    if (iconPath != null) {
+      return Padding(
+        padding: AppScale.all(AppSpacing.sm),
+        child: SvgPicture.asset(iconPath, width: size, height: size),
+      );
+    }
+
+    if (icon != null) {
+      return Icon(icon, size: size, color: AppColors.textSecondary);
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final prefixIconPath = widget.prefixIconPath;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -57,16 +79,7 @@ class _AppTextFieldState extends State<AppTextField> {
           onFieldSubmitted: widget.onSubmitted,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            prefixIcon: prefixIconPath == null
-                ? null
-                : Padding(
-                    padding: AppScale.all(AppSpacing.sm),
-                    child: SvgPicture.asset(
-                      prefixIconPath,
-                      width: AppScale.s(AppSizes.iconMd),
-                      height: AppScale.s(AppSizes.iconMd),
-                    ),
-                  ),
+            prefixIcon: _buildPrefixIcon(),
             suffixIcon: widget.isPassword
                 ? IconButton(
                     onPressed: _toggleObscured,

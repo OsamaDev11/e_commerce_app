@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/features/cart/data/cart_item_model.dart';
+import 'package:e_commerce_app/features/cart/data/models/cart_item_model.dart';
 
 final class CartState {
   const CartState({this.items = const []});

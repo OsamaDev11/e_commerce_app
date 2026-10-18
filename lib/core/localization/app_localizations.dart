@@ -106,11 +106,23 @@ abstract class AppLocalizations {
   /// **'Sign in to continue shopping.'**
   String get signInToContinue;
 
-  /// No description provided for @email.
+  /// No description provided for @username.
   ///
   /// In en, this message translates to:
-  /// **'Email'**
-  String get email;
+  /// **'Username'**
+  String get username;
+
+  /// No description provided for @usernameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your username'**
+  String get usernameHint;
+
+  /// No description provided for @usernameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Username is required'**
+  String get usernameRequired;
 
   /// No description provided for @password.
   ///
@@ -124,41 +136,17 @@ abstract class AppLocalizations {
   /// **'••••••••'**
   String get passwordHint;
 
-  /// No description provided for @signIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in'**
-  String get signIn;
-
-  /// No description provided for @invalidEmailOrPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid email or password'**
-  String get invalidEmailOrPassword;
-
-  /// No description provided for @somethingWentWrong.
-  ///
-  /// In en, this message translates to:
-  /// **'Something went wrong. Please try again.'**
-  String get somethingWentWrong;
-
-  /// No description provided for @emailHint.
-  ///
-  /// In en, this message translates to:
-  /// **'user@example.com'**
-  String get emailHint;
-
-  /// No description provided for @emailRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Email is required'**
-  String get emailRequired;
-
   /// No description provided for @passwordRequired.
   ///
   /// In en, this message translates to:
   /// **'Password is required'**
   String get passwordRequired;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signIn;
 
   /// No description provided for @goodMorning.
   ///
@@ -183,6 +171,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =0{No products} =1{1 product} other{{count} products}}'**
   String productsCount(int count);
+
+  /// No description provided for @noProductsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No products found'**
+  String get noProductsFound;
 
   /// No description provided for @addToCart.
   ///
@@ -231,6 +225,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add some products to your cart.'**
   String get addProductsToCart;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get retry;
+
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get somethingWentWrong;
+
+  /// No description provided for @errorNoInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Check your network and try again.'**
+  String get errorNoInternet;
+
+  /// No description provided for @errorTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'The connection timed out. Please try again.'**
+  String get errorTimeout;
+
+  /// No description provided for @errorBadRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'The request could not be completed. Please check your input.'**
+  String get errorBadRequest;
+
+  /// No description provided for @errorUnauthorized.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in to continue.'**
+  String get errorUnauthorized;
+
+  /// No description provided for @errorForbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have permission to do this.'**
+  String get errorForbidden;
+
+  /// No description provided for @errorNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t find what you\'re looking for.'**
+  String get errorNotFound;
+
+  /// No description provided for @errorServer.
+  ///
+  /// In en, this message translates to:
+  /// **'The server is having trouble. Please try again later.'**
+  String get errorServer;
 
   /// No description provided for @pageNotFound.
   ///

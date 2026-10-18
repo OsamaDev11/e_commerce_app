@@ -54,7 +54,9 @@ class AppPrimaryButton extends StatelessWidget {
                 if (icon != null) ...[
                   Icon(
                     icon,
-                    size: AppScale.s(compact ? AppSizes.iconXs : AppSizes.iconMd),
+                    size: AppScale.s(
+                      compact ? AppSizes.iconXs : AppSizes.iconMd,
+                    ),
                   ),
                   AppScale.gw(AppSpacing.xxs),
                 ],

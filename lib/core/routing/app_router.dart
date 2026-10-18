@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:e_commerce_app/core/di/dependency_injection.dart';
 import 'package:e_commerce_app/core/localization/localization_extension.dart';
 import 'package:e_commerce_app/core/routing/routes.dart';
-import 'package:e_commerce_app/features/auth/data/auth_repository.dart';
 import 'package:e_commerce_app/features/auth/logic/login_cubit.dart';
 import 'package:e_commerce_app/features/auth/ui/screens/login_screen.dart';
 import 'package:e_commerce_app/features/cart/logic/cart_cubit.dart';
 import 'package:e_commerce_app/features/cart/ui/screens/cart_screen.dart';
+import 'package:e_commerce_app/features/products/logic/products_cubit.dart';
 import 'package:e_commerce_app/features/products/ui/screens/home_screen.dart';
 
 class AppRouter {
@@ -16,15 +17,20 @@ class AppRouter {
       case Routes.login:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (_) => LoginCubit(AuthRepository()),
+            create: (_) => getIt<LoginCubit>(),
             child: const LoginScreen(),
           ),
         );
 
       case Routes.home:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => CartCubit(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => getIt<ProductsCubit>()..loadProducts(),
+              ),
+              BlocProvider(create: (_) => CartCubit()),
+            ],
             child: const HomeScreen(),
           ),
         );
