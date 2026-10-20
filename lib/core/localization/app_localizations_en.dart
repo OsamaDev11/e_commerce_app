@@ -10,82 +10,67 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get welcomeBack => 'Welcome back';
+  String get appName => 'Lafyuu';
 
   @override
-  String get signInToContinue => 'Sign in to continue shopping.';
+  String get welcomeTitle => 'Welcome to Lafyuu';
 
   @override
-  String get email => 'Email';
+  String get signInToContinue => 'Sign in to continue';
 
   @override
-  String get password => 'Password';
+  String get usernameHint => 'Your Username';
 
   @override
-  String get passwordHint => '••••••••';
+  String get usernameRequired => 'Username is required';
 
   @override
-  String get signIn => 'Sign in';
-
-  @override
-  String get invalidEmailOrPassword => 'Invalid email or password';
-
-  @override
-  String get somethingWentWrong => 'Something went wrong. Please try again.';
-
-  @override
-  String get emailHint => 'user@example.com';
-
-  @override
-  String get emailRequired => 'Email is required';
+  String get passwordHint => 'Password';
 
   @override
   String get passwordRequired => 'Password is required';
 
   @override
-  String get goodMorning => 'Good morning';
+  String get signIn => 'Sign In';
 
   @override
-  String get discoverProducts => 'Discover products';
+  String get category => 'Category';
 
   @override
-  String get featured => 'Featured';
+  String get flashSale => 'Flash Sale';
 
   @override
-  String productsCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count products',
-      one: '1 product',
-      zero: 'No products',
-    );
-    return '$_temp0';
+  String get megaSale => 'Mega Sale';
+
+  @override
+  String get recommendedProduct => 'Recommended Product';
+
+  @override
+  String discountOff(int percent) {
+    return '$percent% Off';
   }
 
   @override
-  String get addToCart => 'Add to cart';
-
-  @override
-  String get myCart => 'My Cart';
-
-  @override
-  String itemsCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count items',
-      one: '1 item',
-      zero: 'No items',
-    );
-    return '$_temp0';
+  String addedToCart(String title) {
+    return '$title added to cart';
   }
 
   @override
-  String get itemsTotal => 'Items total';
+  String get noProductsFound => 'No products found';
 
   @override
-  String get total => 'Total';
+  String get yourCart => 'Your Cart';
+
+  @override
+  String itemsSummary(int count) {
+    return 'Items ($count)';
+  }
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get totalPrice => 'Total Price';
 
   @override
   String get continueShopping => 'Continue shopping';
@@ -95,6 +80,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addProductsToCart => 'Add some products to your cart.';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get errorNoInternet =>
+      'No internet connection. Check your network and try again.';
+
+  @override
+  String get errorTimeout => 'The connection timed out. Please try again.';
+
+  @override
+  String get errorBadRequest =>
+      'The request could not be completed. Please check your input.';
+
+  @override
+  String get errorUnauthorized => 'Please sign in to continue.';
+
+  @override
+  String get errorForbidden => 'You don\'t have permission to do this.';
+
+  @override
+  String get errorNotFound => 'We couldn\'t find what you\'re looking for.';
+
+  @override
+  String get errorServer =>
+      'The server is having trouble. Please try again later.';
 
   @override
   String get pageNotFound => 'Page not found';

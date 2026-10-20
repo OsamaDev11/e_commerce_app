@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:e_commerce_app/features/cart/data/cart_item_model.dart';
+import 'package:e_commerce_app/features/cart/data/models/cart_item_model.dart';
 import 'package:e_commerce_app/features/cart/logic/cart_state.dart';
-import 'package:e_commerce_app/features/products/data/product_model.dart';
+import 'package:e_commerce_app/features/products/data/models/product_model.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(const CartState());

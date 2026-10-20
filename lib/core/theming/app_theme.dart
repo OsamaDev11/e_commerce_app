@@ -20,39 +20,39 @@ abstract final class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       colorScheme: colorScheme,
+      fontFamily: AppTextStyles.fontFamily,
       scaffoldBackgroundColor: AppColors.background,
       textTheme: TextTheme(
-        headlineMedium: AppTextStyles.h1,
-        titleLarge: AppTextStyles.h2,
-        titleMedium: AppTextStyles.bodyLg.semiBold,
+        titleLarge: AppTextStyles.title,
+        titleMedium: AppTextStyles.subtitle,
+        titleSmall: AppTextStyles.body.bold,
         bodyLarge: AppTextStyles.body,
         bodyMedium: AppTextStyles.body,
         bodySmall: AppTextStyles.caption,
-        labelLarge: AppTextStyles.bodyLg.semiBold,
-        labelMedium: AppTextStyles.bodySm,
+        labelLarge: AppTextStyles.subtitle,
+        labelMedium: AppTextStyles.body,
         labelSmall: AppTextStyles.caption,
       ),
-      iconTheme: const IconThemeData(color: AppColors.textPrimary),
+      iconTheme: const IconThemeData(color: AppColors.textSecondary),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.primary,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.inputBackground,
+        fillColor: AppColors.surface,
         hintStyle: AppTextStyles.body.secondary,
         errorStyle: AppTextStyles.caption.withColor(AppColors.error),
+        prefixIconColor: AppColors.textSecondary,
+        suffixIconColor: AppColors.textSecondary,
         contentPadding: AppScale.symmetric(
           horizontal: AppSpacing.md,
           vertical: AppSpacing.md,
         ),
-        border: _inputBorder(AppColors.border, AppSizes.borderWidth),
-        enabledBorder: _inputBorder(AppColors.border, AppSizes.borderWidth),
-        focusedBorder: _inputBorder(
-          AppColors.primary,
-          AppSizes.focusedBorderWidth,
-        ),
-        errorBorder: _inputBorder(AppColors.error, AppSizes.borderWidth),
-        focusedErrorBorder: _inputBorder(
-          AppColors.error,
-          AppSizes.focusedBorderWidth,
-        ),
+        border: _inputBorder(AppColors.border),
+        enabledBorder: _inputBorder(AppColors.border),
+        focusedBorder: _inputBorder(AppColors.primary),
+        errorBorder: _inputBorder(AppColors.error),
+        focusedErrorBorder: _inputBorder(AppColors.error),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -62,14 +62,11 @@ abstract final class AppTheme {
           foregroundColor: AppColors.onPrimary,
           disabledBackgroundColor: AppColors.primary,
           disabledForegroundColor: AppColors.onPrimary,
-          minimumSize: Size(
-            AppScale.s(AppSizes.buttonHeight),
-            AppScale.s(AppSizes.buttonHeight),
-          ),
-          padding: AppScale.symmetric(horizontal: AppSpacing.lg),
-          textStyle: AppTextStyles.bodyLg.semiBold,
+          minimumSize: Size.fromHeight(AppScale.s(AppSizes.buttonHeight)),
+          padding: AppScale.symmetric(horizontal: AppSpacing.md),
+          textStyle: AppTextStyles.subtitle,
           shape: RoundedRectangleBorder(
-            borderRadius: AppScale.radius(AppRadius.md),
+            borderRadius: AppScale.radius(AppRadius.sm),
           ),
         ),
       ),
@@ -81,18 +78,18 @@ abstract final class AppTheme {
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
         backgroundColor: AppColors.textPrimary,
-        contentTextStyle: AppTextStyles.bodySm.medium.onPrimary,
+        contentTextStyle: AppTextStyles.body.onPrimary,
         shape: RoundedRectangleBorder(
-          borderRadius: AppScale.radius(AppRadius.md),
+          borderRadius: AppScale.radius(AppRadius.sm),
         ),
       ),
     );
   }
 
-  static OutlineInputBorder _inputBorder(Color color, double width) {
+  static OutlineInputBorder _inputBorder(Color color) {
     return OutlineInputBorder(
-      borderRadius: AppScale.radius(AppRadius.md),
-      borderSide: BorderSide(color: color, width: width),
+      borderRadius: AppScale.radius(AppRadius.sm),
+      borderSide: BorderSide(color: color, width: AppSizes.borderWidth),
     );
   }
 }

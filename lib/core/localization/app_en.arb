@@ -1,41 +1,56 @@
 {
   "@@locale": "en",
-  "welcomeBack": "Welcome back",
-  "signInToContinue": "Sign in to continue shopping.",
-  "email": "Email",
-  "password": "Password",
-  "passwordHint": "••••••••",
-  "signIn": "Sign in",
-  "invalidEmailOrPassword": "Invalid email or password",
-  "somethingWentWrong": "Something went wrong. Please try again.",
-  "emailHint": "user@example.com",
-  "emailRequired": "Email is required",
+  "appName": "Lafyuu",
+  "welcomeTitle": "Welcome to Lafyuu",
+  "signInToContinue": "Sign in to continue",
+  "usernameHint": "Your Username",
+  "usernameRequired": "Username is required",
+  "passwordHint": "Password",
   "passwordRequired": "Password is required",
-  "goodMorning": "Good morning",
-  "discoverProducts": "Discover products",
-  "featured": "Featured",
-  "productsCount": "{count, plural, =0{No products} =1{1 product} other{{count} products}}",
-  "@productsCount": {
+  "signIn": "Sign In",
+  "category": "Category",
+  "flashSale": "Flash Sale",
+  "megaSale": "Mega Sale",
+  "recommendedProduct": "Recommended Product",
+  "discountOff": "{percent}% Off",
+  "@discountOff": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "addedToCart": "{title} added to cart",
+  "@addedToCart": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "noProductsFound": "No products found",
+  "yourCart": "Your Cart",
+  "itemsSummary": "Items ({count})",
+  "@itemsSummary": {
     "placeholders": {
       "count": {
         "type": "int"
       }
     }
   },
-  "addToCart": "Add to cart",
-  "myCart": "My Cart",
-  "itemsCount": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
-  "@itemsCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "itemsTotal": "Items total",
-  "total": "Total",
+  "discount": "Discount",
+  "totalPrice": "Total Price",
   "continueShopping": "Continue shopping",
   "cartIsEmpty": "Your cart is empty",
   "addProductsToCart": "Add some products to your cart.",
+  "retry": "Try again",
+  "somethingWentWrong": "Something went wrong. Please try again.",
+  "errorNoInternet": "No internet connection. Check your network and try again.",
+  "errorTimeout": "The connection timed out. Please try again.",
+  "errorBadRequest": "The request could not be completed. Please check your input.",
+  "errorUnauthorized": "Please sign in to continue.",
+  "errorForbidden": "You don't have permission to do this.",
+  "errorNotFound": "We couldn't find what you're looking for.",
+  "errorServer": "The server is having trouble. Please try again later.",
   "pageNotFound": "Page not found"
 }
