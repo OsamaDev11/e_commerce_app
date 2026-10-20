@@ -33,5 +33,7 @@ class ProductModel {
   final List<String> images;
   final String? brand;
 
+  double get discountedPrice => price * (1 - discountPercentage / 100);
+
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 }

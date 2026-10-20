@@ -94,28 +94,28 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('en')];
 
-  /// No description provided for @welcomeBack.
+  /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Welcome back'**
-  String get welcomeBack;
+  /// **'Lafyuu'**
+  String get appName;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Lafyuu'**
+  String get welcomeTitle;
 
   /// No description provided for @signInToContinue.
   ///
   /// In en, this message translates to:
-  /// **'Sign in to continue shopping.'**
+  /// **'Sign in to continue'**
   String get signInToContinue;
-
-  /// No description provided for @username.
-  ///
-  /// In en, this message translates to:
-  /// **'Username'**
-  String get username;
 
   /// No description provided for @usernameHint.
   ///
   /// In en, this message translates to:
-  /// **'Enter your username'**
+  /// **'Your Username'**
   String get usernameHint;
 
   /// No description provided for @usernameRequired.
@@ -124,16 +124,10 @@ abstract class AppLocalizations {
   /// **'Username is required'**
   String get usernameRequired;
 
-  /// No description provided for @password.
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
   /// No description provided for @passwordHint.
   ///
   /// In en, this message translates to:
-  /// **'••••••••'**
+  /// **'Password'**
   String get passwordHint;
 
   /// No description provided for @passwordRequired.
@@ -145,32 +139,44 @@ abstract class AppLocalizations {
   /// No description provided for @signIn.
   ///
   /// In en, this message translates to:
-  /// **'Sign in'**
+  /// **'Sign In'**
   String get signIn;
 
-  /// No description provided for @goodMorning.
+  /// No description provided for @category.
   ///
   /// In en, this message translates to:
-  /// **'Good morning'**
-  String get goodMorning;
+  /// **'Category'**
+  String get category;
 
-  /// No description provided for @discoverProducts.
+  /// No description provided for @flashSale.
   ///
   /// In en, this message translates to:
-  /// **'Discover products'**
-  String get discoverProducts;
+  /// **'Flash Sale'**
+  String get flashSale;
 
-  /// No description provided for @featured.
+  /// No description provided for @megaSale.
   ///
   /// In en, this message translates to:
-  /// **'Featured'**
-  String get featured;
+  /// **'Mega Sale'**
+  String get megaSale;
 
-  /// No description provided for @productsCount.
+  /// No description provided for @recommendedProduct.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{No products} =1{1 product} other{{count} products}}'**
-  String productsCount(int count);
+  /// **'Recommended Product'**
+  String get recommendedProduct;
+
+  /// No description provided for @discountOff.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% Off'**
+  String discountOff(int percent);
+
+  /// No description provided for @addedToCart.
+  ///
+  /// In en, this message translates to:
+  /// **'{title} added to cart'**
+  String addedToCart(String title);
 
   /// No description provided for @noProductsFound.
   ///
@@ -178,35 +184,29 @@ abstract class AppLocalizations {
   /// **'No products found'**
   String get noProductsFound;
 
-  /// No description provided for @addToCart.
+  /// No description provided for @yourCart.
   ///
   /// In en, this message translates to:
-  /// **'Add to cart'**
-  String get addToCart;
+  /// **'Your Cart'**
+  String get yourCart;
 
-  /// No description provided for @myCart.
+  /// No description provided for @itemsSummary.
   ///
   /// In en, this message translates to:
-  /// **'My Cart'**
-  String get myCart;
+  /// **'Items ({count})'**
+  String itemsSummary(int count);
 
-  /// No description provided for @itemsCount.
+  /// No description provided for @discount.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =0{No items} =1{1 item} other{{count} items}}'**
-  String itemsCount(int count);
+  /// **'Discount'**
+  String get discount;
 
-  /// No description provided for @itemsTotal.
+  /// No description provided for @totalPrice.
   ///
   /// In en, this message translates to:
-  /// **'Items total'**
-  String get itemsTotal;
-
-  /// No description provided for @total.
-  ///
-  /// In en, this message translates to:
-  /// **'Total'**
-  String get total;
+  /// **'Total Price'**
+  String get totalPrice;
 
   /// No description provided for @continueShopping.
   ///

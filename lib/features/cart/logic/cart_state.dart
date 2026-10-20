@@ -9,12 +9,21 @@ final class CartState {
     return items.fold(0, (total, item) => total + item.quantity);
   }
 
-  double get totalPrice {
+  double get subtotal {
     return items.fold(
       0,
       (total, item) => total + (item.product.price * item.quantity),
     );
   }
+
+  double get totalPrice {
+    return items.fold(
+      0,
+      (total, item) => total + (item.product.discountedPrice * item.quantity),
+    );
+  }
+
+  double get totalDiscount => subtotal - totalPrice;
 
   bool get isEmpty => items.isEmpty;
 

@@ -10,79 +10,67 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get welcomeBack => 'Welcome back';
+  String get appName => 'Lafyuu';
 
   @override
-  String get signInToContinue => 'Sign in to continue shopping.';
+  String get welcomeTitle => 'Welcome to Lafyuu';
 
   @override
-  String get username => 'Username';
+  String get signInToContinue => 'Sign in to continue';
 
   @override
-  String get usernameHint => 'Enter your username';
+  String get usernameHint => 'Your Username';
 
   @override
   String get usernameRequired => 'Username is required';
 
   @override
-  String get password => 'Password';
-
-  @override
-  String get passwordHint => '••••••••';
+  String get passwordHint => 'Password';
 
   @override
   String get passwordRequired => 'Password is required';
 
   @override
-  String get signIn => 'Sign in';
+  String get signIn => 'Sign In';
 
   @override
-  String get goodMorning => 'Good morning';
+  String get category => 'Category';
 
   @override
-  String get discoverProducts => 'Discover products';
+  String get flashSale => 'Flash Sale';
 
   @override
-  String get featured => 'Featured';
+  String get megaSale => 'Mega Sale';
 
   @override
-  String productsCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count products',
-      one: '1 product',
-      zero: 'No products',
-    );
-    return '$_temp0';
+  String get recommendedProduct => 'Recommended Product';
+
+  @override
+  String discountOff(int percent) {
+    return '$percent% Off';
+  }
+
+  @override
+  String addedToCart(String title) {
+    return '$title added to cart';
   }
 
   @override
   String get noProductsFound => 'No products found';
 
   @override
-  String get addToCart => 'Add to cart';
+  String get yourCart => 'Your Cart';
 
   @override
-  String get myCart => 'My Cart';
-
-  @override
-  String itemsCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count items',
-      one: '1 item',
-      zero: 'No items',
-    );
-    return '$_temp0';
+  String itemsSummary(int count) {
+    return 'Items ($count)';
   }
 
   @override
-  String get itemsTotal => 'Items total';
+  String get discount => 'Discount';
 
   @override
-  String get total => 'Total';
+  String get totalPrice => 'Total Price';
 
   @override
   String get continueShopping => 'Continue shopping';

@@ -46,7 +46,7 @@ class _ImageStateIcon extends StatelessWidget {
     return Center(
       child: Icon(
         icon,
-        size: AppScale.s(AppSizes.iconLg),
+        size: AppScale.s(AppSizes.iconMd),
         color: AppColors.textSecondary,
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 abstract final class AppScale {
-  static const double _designWidth = 390;
-  static const double _designHeight = 844;
+  static const double _designWidth = 375;
+  static const double _designHeight = 812;
 
   static const double maxTextScaleFactor = 1.3;
 

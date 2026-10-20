@@ -7,13 +7,10 @@ import 'package:e_commerce_app/core/networking/auth_interceptor.dart';
 import 'package:e_commerce_app/core/storage/token_storage.dart';
 
 abstract final class DioFactory {
-
   static Dio create({
     required TokenStorage tokenStorage,
     required VoidCallback onSessionExpired,
   }) {
-
-
     final dio = _createDio();
     final plainDio = _createDio();
 

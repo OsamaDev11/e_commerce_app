@@ -1,23 +1,47 @@
 import 'package:e_commerce_app/core/networking/app_failure.dart';
 
-sealed class LoginState {
-  const LoginState();
-}
+enum LoginStatus { initial, loading, success, failure }
 
-final class LoginInitial extends LoginState {
-  const LoginInitial();
-}
+final class LoginState {
+  const LoginState({
+    this.username = '',
+    this.password = '',
+    this.status = LoginStatus.initial,
+    this.showErrors = false,
+    this.failure,
+  });
 
-final class LoginLoading extends LoginState {
-  const LoginLoading();
-}
+  final String username;
+  final String password;
+  final LoginStatus status;
+  final bool showErrors;
+  final AppFailure? failure;
 
-final class LoginSuccess extends LoginState {
-  const LoginSuccess();
-}
+  bool get isUsernameValid => username.trim().isNotEmpty;
+  bool get isPasswordValid => password.isNotEmpty;
+  bool get isValid => isUsernameValid && isPasswordValid;
+  bool get isLoading => status == LoginStatus.loading;
 
-final class LoginFailure extends LoginState {
-  const LoginFailure(this.failure);
+  bool get showUsernameError => showErrors && !isUsernameValid;
+  bool get showPasswordError => showErrors && !isPasswordValid;
 
-  final AppFailure failure;
+  LoginState copyWith({
+    String? username,
+    String? password,
+    LoginStatus? status,
+    bool? showErrors,
+    AppFailure? failure,
+  }) {
+    final nextStatus = status ?? this.status;
+
+    return LoginState(
+      username: username ?? this.username,
+      password: password ?? this.password,
+      status: nextStatus,
+      showErrors: showErrors ?? this.showErrors,
+      failure: nextStatus == LoginStatus.failure
+          ? failure ?? this.failure
+          : null,
+    );
+  }
 }

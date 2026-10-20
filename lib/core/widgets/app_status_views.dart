@@ -45,10 +45,14 @@ class AppStatusView extends StatelessWidget {
             Icon(
               icon,
               size: AppScale.s(AppSizes.iconXl),
-              color: AppColors.textSecondary,
+              color: AppColors.primary,
             ),
             AppScale.gh(AppSpacing.md),
-            Text(title, textAlign: TextAlign.center, style: AppTextStyles.h2),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.title,
+            ),
             if (message != null) ...[
               AppScale.gh(AppSpacing.xs),
               Text(
@@ -58,12 +62,8 @@ class AppStatusView extends StatelessWidget {
               ),
             ],
             if (actionLabel != null) ...[
-              AppScale.gh(AppSpacing.xl),
-              AppPrimaryButton(
-                label: actionLabel,
-                expanded: false,
-                onPressed: onAction,
-              ),
+              AppScale.gh(AppSpacing.lg),
+              AppPrimaryButton(label: actionLabel, onPressed: onAction),
             ],
           ],
         ),
